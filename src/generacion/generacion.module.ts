@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { GeneracionController } from '../generaciones/controllers/generaciones.controller';
-import { GeneracionService } from '../generaciones/services/generaciones.service';
+import { GeneracionController } from './controllers/generacion.controller';
+import { GeneracionService } from './services/generacion.service';
 import { Generacion, GeneracionSchema } from './schemas/generacion.schema';
 
 @Module({

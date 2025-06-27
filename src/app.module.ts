@@ -7,7 +7,7 @@ import { DocentesModule } from './docentes/docentes.module';
 import { AlumnosModule } from './alumnos/alumnos.module';
 import { MateriasModule } from './materias/materias.module';
 import { InscripcionModule } from './inscripcion/inscripcion.module';
-import { GeneracionModule } from './generaciones/generacion.module';
+import { GeneracionModule } from './generacion/generacion.module';
 import { CicloEscolarModule } from './ciclo_escolar/ciclo_escolar.module';
 import { AulasModule } from './aulas/aulas.module';
 import { AsignacionModule } from './asignacion/asignacion.module';

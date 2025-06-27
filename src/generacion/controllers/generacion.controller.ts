@@ -12,8 +12,8 @@ import {
 } from '@nestjs/common';
 
 import { GeneracionDto, UpdateGeneracionDto } from '../dtos/generacion.dtos';
-import { ParseMongoIdPipe } from './../../common/parse-mongo-id/parse-mongo-id.pipe';
-import { GeneracionService } from '../services/generaciones.service';
+import { ParseMongoIdPipe } from '../../common/parse-mongo-id/parse-mongo-id.pipe';
+import { GeneracionService } from '../services/generacion.service';
 
 @Controller('generacion')
 export class GeneracionController {
