@@ -6,17 +6,20 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { DocentesModule } from './docentes/docentes.module';
 import { AlumnosModule } from './alumnos/alumnos.module';
 import { MateriasModule } from './materias/materias.module';
-import { AppService } from './app.service';
-/*import { CarrerasModule } from './carreras/carreras.module';
+import { InscripcionModule } from './inscripcion/inscripcion.module';
+import { GeneracionModule } from './generaciones/generacion.module';
+import { CicloEscolarModule } from './ciclo_escolar/ciclo_escolar.module';
 import { AulasModule } from './aulas/aulas.module';
-import { CiclosEscolaresModule } from './ciclos-escolares/ciclos-escolares.module';
-import { GeneracionesModule } from './generaciones/generaciones.module';
-import { AsignacionesModule } from './asignaciones/asignaciones.module';
-import { InscripcionesModule } from './inscripciones/inscripciones.module';
-import { DocumentosModule } from './documentos/documentos.module';*/
+import { AsignacionModule } from './asignacion/asignacion.module';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
+    InscripcionModule,
+    GeneracionModule,
+    CicloEscolarModule,
+    AulasModule,
+    AsignacionModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -24,16 +27,9 @@ import { DocumentosModule } from './documentos/documentos.module';*/
     UsuariosModule,
     DocentesModule,
     AlumnosModule,
-    MateriasModule,
-    /*CarrerasModule,
-    AulasModule,
-    CiclosEscolaresModule,
-    GeneracionesModule,
-    AsignacionesModule,
-    InscripcionesModule,
-    DocumentosModule,*/
+    MateriasModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

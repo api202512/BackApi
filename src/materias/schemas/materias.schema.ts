@@ -26,9 +26,6 @@ export class Materia {
   @Prop({ required: true })
   horasPracticas: number;
 
-  @Prop({ type: [{ type: Types.ObjectId, ref: 'Materia' }] })
-  prerequisitos: Types.ObjectId[];
-
   @Prop({ default: true })
   activa: boolean;
 }

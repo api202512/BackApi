@@ -4,8 +4,6 @@ import {
   IsNotEmpty,
   IsOptional,
   IsBoolean,
-  IsArray,
-  IsMongoId,
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
@@ -37,11 +35,6 @@ export class MateriaDto {
   @IsNumber()
   @IsNotEmpty()
   readonly horasPracticas: number;
-
-  @IsArray()
-  @IsMongoId({ each: true })
-  @IsOptional()
-  readonly prerequisitos?: string[];
 
   @IsBoolean()
   @IsOptional()
