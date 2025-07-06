@@ -14,7 +14,7 @@ import { AdministradorDto, UpdateAdministradorDto } from './../dtos/admin.dtos';
 import { ParseMongoIdPipe } from './../../common/parse-mongo-id/parse-mongo-id.pipe';
 import { AdministradorService } from './../services/admin.service';
 
-@Controller('administradores')
+@Controller('administrador')
 export class AdministradorController {
   constructor(private readonly adminService: AdministradorService) {}
   

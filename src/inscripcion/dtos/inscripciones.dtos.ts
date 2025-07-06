@@ -1,10 +1,10 @@
 import { 
   IsString, 
   IsNotEmpty, 
-  IsDate, 
   IsNumber, 
   IsMongoId, 
-  IsEnum
+  IsEnum,
+  IsDateString
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { RolEnum } from '../schemas/inscripcion.schema';
@@ -25,11 +25,11 @@ export class InscripcionDto {
   @IsEnum(RolEnum)
   readonly estatus: RolEnum;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
-  readonly fechaRegistro: Date;
+  readonly fechaInscripcion: Date;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   readonly fechaCalificacion: Date;
 

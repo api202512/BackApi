@@ -3,16 +3,17 @@ import {
   IsNotEmpty, 
   IsBoolean, 
   IsNumber, 
-  IsDate 
+  IsDate, 
+  IsDateString
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class GeneracionDto {
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   readonly anioInicio: Date;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   readonly anioFin: Date;
 

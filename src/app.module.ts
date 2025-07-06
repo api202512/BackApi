@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { AdministradoresModule } from './admin/admin.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { DocentesModule } from './docentes/docentes.module';
 import { AlumnosModule } from './alumnos/alumnos.module';
@@ -20,6 +21,7 @@ import { AppService } from './app.service';
     CicloEscolarModule,
     AulasModule,
     AsignacionModule,
+    AdministradoresModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),

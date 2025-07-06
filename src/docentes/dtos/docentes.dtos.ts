@@ -1,4 +1,10 @@
-import { IsMongoId, IsString, IsNotEmpty } from 'class-validator';
+import { 
+  IsMongoId, 
+  IsString, 
+  IsNotEmpty, 
+  IsDateString, 
+  IsNumber 
+} from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class DocenteDto {
@@ -14,11 +20,11 @@ export class DocenteDto {
   @IsNotEmpty()
   readonly titulo: string;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  readonly experenciaAnio: number;
+  readonly experienciaAnio: number;
 
-  @IsString()
+  @IsDateString()
   @IsNotEmpty()
   readonly fechaIngreso: Date;
 }

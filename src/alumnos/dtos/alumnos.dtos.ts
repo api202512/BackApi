@@ -3,7 +3,7 @@ import {
   IsNumber,
   IsNotEmpty,
   IsMongoId,
-  IsDate,
+  IsDateString,
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
@@ -37,11 +37,11 @@ export class AlumnoDto {
   @IsNotEmpty()
   readonly creditosAcumulados: number;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   readonly fechaIngreso: Date;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   readonly fechaEgreso: Date;
 }
