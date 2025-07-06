@@ -9,7 +9,7 @@ export enum RolEnum {
   BAJA = 'BAJA',
 }
 
-@Schema({ timestamps: true })
+@Schema()
 export class Inscripcion {
   @Prop({ type: Types.ObjectId, ref: 'Alumnos', required: true })
   alumnoId: Types.ObjectId;

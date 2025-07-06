@@ -3,7 +3,7 @@ import { Document } from 'mongoose';
 
 export type CicloEscolarDocument = CicloEscolar & Document;
 
-@Schema({ timestamps: true })
+@Schema()
 export class CicloEscolar {
   @Prop({ required: true })
   nombre: string;

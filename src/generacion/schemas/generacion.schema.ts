@@ -3,13 +3,13 @@ import { Document } from 'mongoose';
 
 export type GeneracionDocument = Generacion & Document;
 
-@Schema({ timestamps: true })
+@Schema()
 export class Generacion {
   @Prop({ required: true })
-  anioInicio: number;
+  anioInicio: Date;
 
   @Prop({ required: true })
-  anioFin: number;
+  anioFin: Date;
 
   @Prop({ required: true })
   descripcion: string;

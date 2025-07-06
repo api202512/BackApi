@@ -7,10 +7,9 @@ export enum RolEnum {
     AULA = 'AULA',
     LABORATORIO = 'LABORATORIO',
     AUDITORIO = 'AUDITORIO',
-    SALON_USO_MULTIPLE = 'SALON_USO_MULTIPLE',
 }
 
-@Schema({ timestamps: true })
+@Schema()
 export class Aula {
   @Prop({ required: true })
   nombre: string;

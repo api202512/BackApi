@@ -10,7 +10,7 @@ export enum EstatusAlumnoEnum {
   EGRESADO = 'EGRESADO'
 }
 
-@Schema({ timestamps: true })
+@Schema()
 export class Alumno {
   @Prop({ type: Types.ObjectId, ref: 'Usuario', required: true })
   usuarioId: Types.ObjectId;

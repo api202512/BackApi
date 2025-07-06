@@ -3,15 +3,7 @@ import { Document, Types } from 'mongoose';
 
 export type AsignacionDocument = Asignacion & Document;
 
-export enum RolEnum {
-  Lunes = 'Lunes',
-  Martes = 'Martes',
-  Miercoles = 'Miercoles',
-  Jueves = 'Jueves',
-  Viernes = 'Viernes',
-}
-
-@Schema({ timestamps: true })
+@Schema()
 export class Asignacion {
   @Prop({ type: Types.ObjectId, ref: 'Docentes', required: true })
   docenteId: Types.ObjectId;
@@ -28,17 +20,18 @@ export class Asignacion {
   @Prop({ required: true })
   grupo: string;
 
-  @Prop({ enum: RolEnum, required: true })
-  horarios_dia: RolEnum;
-
-  @Prop({ required: true })
-  horarios_horaInicio: Date;
-
-  @Prop({ required: true })
-  horarios_horaFin: Date;
-
-  @Prop({ required: true })
-  activo: boolean;
+  @Prop({
+    type: {
+      dia: String,
+      horaInicio: String,
+      horaFin: String
+    }
+   })
+   Horarios: {
+    dia: string,
+    horaInicio: string,
+    horaFin: string
+   }
 }
 
 export const AsignacionSchema = SchemaFactory.createForClass(Asignacion);

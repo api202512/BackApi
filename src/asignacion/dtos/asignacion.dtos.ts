@@ -2,12 +2,24 @@ import {
   IsString, 
   IsNotEmpty, 
   IsMongoId, 
-  IsEnum,
-  IsDateString,
-  IsBoolean
+  ValidateNested
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
-import { RolEnum } from '../schemas/asignacion.schema';
+import { Type } from 'class-transformer';
+
+class HorarioDto {
+  @IsString()
+  @IsNotEmpty()
+  dia: string;
+
+  @IsString()
+  @IsNotEmpty()
+  horaInicio: string;
+
+  @IsString()
+  @IsNotEmpty()
+  horaFin: string;
+}
 
 export class AsignacionDto {
   @IsMongoId()
@@ -30,20 +42,10 @@ export class AsignacionDto {
   @IsNotEmpty()
   readonly grupo: string;
 
-  @IsEnum(RolEnum)
-  readonly horarios_dia: RolEnum;
-
-  @IsDateString()
+  @ValidateNested()
+  @Type(() => HorarioDto)
   @IsNotEmpty()
-  readonly horarios_horaInicio: Date;
-
-  @IsDateString()
-  @IsNotEmpty()
-  readonly horarios_horaFin: Date;
-
-  @IsBoolean()
-  @IsNotEmpty()
-  readonly activo: boolean;
+  readonly Horario: HorarioDto;
 }
 
 export class UpdateAsignacionDto extends PartialType(AsignacionDto) {}

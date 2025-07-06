@@ -1,14 +1,20 @@
-import { IsString, IsNotEmpty, IsBoolean, IsNumber } from 'class-validator';
+import { 
+  IsString, 
+  IsNotEmpty, 
+  IsBoolean, 
+  IsNumber, 
+  IsDate 
+} from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class GeneracionDto {
-  @IsNumber()
+  @IsDate()
   @IsNotEmpty()
-  readonly anioInicio: number;
+  readonly anioInicio: Date;
 
-  @IsNumber()
+  @IsDate()
   @IsNotEmpty()
-  readonly anioFin: number;
+  readonly anioFin: Date;
 
   @IsString()
   @IsNotEmpty()

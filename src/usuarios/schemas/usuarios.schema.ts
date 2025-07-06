@@ -9,7 +9,7 @@ export enum RolEnum {
   ALUMNO = 'ALUMNO',
 }
 
-@Schema({ timestamps: true })
+@Schema()
 export class Usuario {
   @Prop({ required: true })
   nombreCompleto: string;
@@ -35,10 +35,10 @@ export class Usuario {
   @Prop({ required: true })
   respuestaSeguridad: string;
 
-  @Prop()
+  @Prop({ required: true })
   telefono: string;
 
-  @Prop()
+  @Prop({ required: true })
   fechaNacimiento: Date;
 
   @Prop({
