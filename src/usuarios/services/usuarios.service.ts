@@ -14,6 +14,11 @@ export class UsuarioService {
     return this.usuarioModel.find().exec();
   }
 
+  async buscarPorEmail(email: string): Promise<Usuario | null> {
+  return this.usuarioModel.findOne({ email });
+}
+
+
   async findOne(id: string) {
     const usuario = await this.usuarioModel.findById(id).exec();
     if (!usuario) {
