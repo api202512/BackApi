@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { ApiUso } from 'src/apiuso/schemas/api-uso.schema';
-import { Login } from 'src/login/schemas/login.schema';
 
 @Injectable()
 export class ApiUsoService {
@@ -17,15 +16,19 @@ export class ApiUsoService {
     endpoint: string;
   }) {
     await this.usoModel.create({
-      ...data,
+      userId: new Types.ObjectId(data.userId),
+      email: data.email,
+      apiKey: data.apiKey,
+      endpoint: data.endpoint,
       fecha: new Date(),
     });
   }
 
   async obtenerTodos() {
-    return this.usoModel.find().sort({ fecha: -1 }).exec();
+    return this.usoModel
+      .find()
+      .sort({ fecha: -1 })
+      .populate('userId', 'nombre email rol')
+      .exec();
   }
 }
-
-
-

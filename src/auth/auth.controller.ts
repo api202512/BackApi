@@ -24,7 +24,7 @@ export class AuthController {
 
     const token = this.jwtService.sign({ sub: user.email, rol: user.rol });
 
-    const apiKey = await this.apiKeyService.validarClave(user.email);
+    const apiKey = await this.apiKeyService.validarApiKey(user.email);
 
     return res.status(200).json({ token, apiKey });
   }

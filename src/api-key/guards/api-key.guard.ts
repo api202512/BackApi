@@ -15,7 +15,7 @@ export class ApiKeyGuard implements CanActivate {
       throw new UnauthorizedException('API Key requerida');
     }
 
-    const apiKey = await this.apiKeyService.validarClave(apiKeyHeader);
+    const apiKey = await this.apiKeyService.validarApiKey(apiKeyHeader);
 
     if (!apiKey || !apiKey.isActive) {
       throw new UnauthorizedException('API Key inválida o inactiva');

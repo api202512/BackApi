@@ -48,10 +48,17 @@ import { ApiKeyMiddleware } from './common/parse-mongo-id/middleware/api-key.mid
   controllers: [AppController],
   providers: [AppService],
 })
+
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ApiKeyMiddleware)
-      .forRoutes({ path: 'api/publico/*', method: RequestMethod.ALL });
+      .forRoutes(
+        'usuarios',
+        'materias',
+        'ciclo-escolar',
+        'aulas',
+        'alumno'
+      );
   }
 }

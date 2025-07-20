@@ -41,11 +41,10 @@ export class ApiKeyService {
     }
   }
 
-  async validarClave(apiKey: string) {
-    const registro = await this.apiKeyModel
+  async validarApiKey(apiKey: string) {
+    return this.apiKeyModel
       .findOne({ apiKey })
-      .populate('userId', 'email'); // asegúrate de incluir 'email'
-    return registro;
-}
-
+      .populate('userId', 'nombre email rol') // <-- Asegúrate de esto
+      .exec();
+  }
 }
