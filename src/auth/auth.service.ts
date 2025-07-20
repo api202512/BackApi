@@ -1,27 +1,34 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { UsuarioService } from './../usuarios/services/usuarios.service';
+import { LoginService } from './../login/services/login.service';
 import * as bcrypt from 'bcryptjs';
+import { use } from 'passport';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private usuariosService: UsuarioService,
+    private loginService: LoginService,
     private jwtService: JwtService,
   ) {}
 
   async validarUsuario(email: string, password: string) {
-    const usuario = await this.usuariosService.buscarPorEmail(email);
-    if (usuario && bcrypt.compareSync(password, usuario.contraseña)) {
+    const usuario = await this.loginService.buscarPorEmail(email);
+    if (usuario && bcrypt.compareSync(password, usuario.password)) {
       return usuario;
     }
     return null;
   }
 
   async login(usuario: any) {
-    const payload = { email: usuario.email, sub: usuario._id, rol: usuario.rol };
+    const payload = {
+      userId: usuario._id,  // 👈 Asegúrate que este `_id` venga del mismo modelo referenciado en ApiKey
+      email: usuario.email,
+      rol: usuario.rol
+    };
+
     return {
       token: this.jwtService.sign(payload),
+      usuario, // esto es opcional para frontend
     };
   }
 }

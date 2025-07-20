@@ -1,15 +1,17 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Request, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from './../../auth/guards/jwt-auth.guard';
 import { ApiKeyService } from '../services/api-key.service';
-@UseGuards(JwtAuthGuard)
+
 @Controller('apikey')
 export class ApiKeyController {
   constructor(private apiKeyService: ApiKeyService) {}
 
   @Get()
-  async obtenerClave(@Req() req) {
-    const userId = req.user._id || req.user.id;
-    const clave = await this.apiKeyService.obtenerOGenerar(userId);
-    return { apiKey: clave };
+  @UseGuards(JwtAuthGuard)
+  async obtenerApiKey(@Request() req) {
+    console.log('🟢 REQ.USER:', req.user);
+    const userId = req.user.userId; // 👈 DEBE venir de la estrategia JWT
+    const apiKey = await this.apiKeyService.obtenerClave(userId);
+    return { apiKey };
   }
 }

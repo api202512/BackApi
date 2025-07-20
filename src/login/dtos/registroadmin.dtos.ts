@@ -4,12 +4,11 @@ import {
   IsNumber, 
   IsMongoId, 
   IsEnum,
-  IsDateString,
-  MinLength
+  IsDateString
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
-export class RegistroDto {
+export class RegistroAdminDto {
   
   @IsString()
   @IsNotEmpty()
@@ -21,12 +20,15 @@ export class RegistroDto {
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(6)
   readonly password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  readonly claveSecreta: string;
 
   @IsString()
   @IsNotEmpty()
   readonly rol: string;
 }
 
-export class UpdateRegistroDto extends PartialType(RegistroDto) {}
+export class UpdateRegistroAdminDto extends PartialType(RegistroAdminDto) {}

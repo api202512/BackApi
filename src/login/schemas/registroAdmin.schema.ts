@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type LoginDocument = Login & Document;
+export type RegistroAdminDocument = RegistroAdmin & Document;
 
 @Schema()
-export class Login {
+export class RegistroAdmin {
   @Prop({ required: true })
   nombre: string;
 
@@ -14,14 +14,16 @@ export class Login {
   @Prop({ required: true })
   password: string;
 
+  @Prop({ required: true })
+  claveSecreta: string;
+
   @Prop({ 
     required: true, 
     enum: ['admin', 'usuario'], 
-    default: 'usuario', 
+    default: 'admin', 
     select: true 
   })
   rol: string;
-
 }
 
-export const LoginSchema = SchemaFactory.createForClass(Login);
+export const RegistroAdminSchema = SchemaFactory.createForClass(RegistroAdmin);

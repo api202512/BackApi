@@ -1,6 +1,8 @@
+import { ApiKeyModule } from './api-key/api-key.module';
+import { ApiUsoModule } from './apiuso/api-uso.module';
 import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
@@ -15,10 +17,12 @@ import { CicloEscolarModule } from './ciclo_escolar/ciclo_escolar.module';
 import { AulasModule } from './aulas/aulas.module';
 import { AsignacionModule } from './asignacion/asignacion.module';
 import { AppService } from './app.service';
+import { ApiKeyMiddleware } from './common/parse-mongo-id/middleware/api-key.middleware';
 
 @Module({
   imports: [
-    LoginModule,
+    ApiKeyModule,
+    ApiUsoModule,
     LoginModule,
     AuthModule,
     InscripcionModule,
@@ -39,4 +43,11 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(ApiKeyMiddleware)
+      .forRoutes('api/public'); // Solo se aplica a rutas bajo /api/public
+      // o usa .forRoutes('*') para aplicarlo a TODAS las rutas
+  }
+}

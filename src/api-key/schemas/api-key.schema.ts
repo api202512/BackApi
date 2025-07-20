@@ -5,7 +5,7 @@ export type ApiKeyDocument = ApiKey & Document;
 
 @Schema()
 export class ApiKey {
-  @Prop({ type: Types.ObjectId, ref: 'Usuario', required: true })
+  @Prop({ type: Types.ObjectId, ref: 'Login', required: true, unique: true })
   userId: Types.ObjectId;
 
   @Prop({ required: true, unique: true })
