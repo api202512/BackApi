@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, UseGuards } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { v4 as uuidv4 } from 'uuid';
@@ -17,14 +17,13 @@ export class ApiKeyService {
 
       console.log('🔍 Buscando API key para userId:', objectId);
 
-
       const existente = await this.apiKeyModel.findOne({ userId: objectId });
-      if (existente) return existente.apiKey;
-
       console.log('📦 Resultado existente:', existente);
 
+      if (existente) return existente.apiKey;
 
       const nuevaKey = uuidv4();
+      console.log('🆕 Generando nueva API Key:', nuevaKey);
 
       const creada = await this.apiKeyModel.create({
         userId: objectId,
@@ -33,13 +32,14 @@ export class ApiKeyService {
         createdAt: new Date(),
       });
 
+      console.log('✅ API Key creada:', creada);
+
       return creada.apiKey;
     } catch (error) {
-      console.error('❌ Error al generar API key:', error);
+      console.error('❌ Error al generar API key:', error.message);
       throw new BadRequestException('Error interno al generar API key');
     }
   }
-
 
   async validarClave(apiKey: string) {
     const registro = await this.apiKeyModel.findOne({ apiKey }).populate('userId');

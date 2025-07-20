@@ -18,16 +18,24 @@ export class AuthService {
     return null;
   }
 
-  async login(usuario: any) {
+  async login(user: any) {
+    const userId = user._id?.toString?.() ?? user.id?.toString?.();
+
     const payload = {
-      userId: usuario.userId,  // 👈 Asegúrate que este `_id` venga del mismo modelo referenciado en ApiKey
-      email: usuario.email,
-      rol: usuario.rol
+      userId,
+      email: user.email,
+      rol: user.rol,
     };
 
+    const token = this.jwtService.sign(payload);
+
     return {
-      token: this.jwtService.sign(payload),
-      usuario, // esto es opcional para frontend
+      token, // 👈 esto debe estar presente
+      usuario: {
+        userId,
+        email: user.email,
+        rol: user.rol
+      }
     };
   }
 }

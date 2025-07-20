@@ -1,4 +1,10 @@
-import { Controller, Get, Request, UseGuards } from '@nestjs/common';
+import { 
+  Controller, 
+  Get, 
+  Request, 
+  UseGuards, 
+  BadRequestException 
+} from '@nestjs/common';
 import { JwtAuthGuard } from './../../auth/guards/jwt-auth.guard';
 import { ApiKeyService } from '../services/api-key.service';
 
@@ -9,9 +15,12 @@ export class ApiKeyController {
   @Get()
   @UseGuards(JwtAuthGuard)
   async obtenerApiKey(@Request() req) {
-    console.log('🟢 REQ.USER:', req.user);
-    const userId = req.user.userId; // Asegúrate que `userId` venga del token JWT
-    const apiKey = await this.apiKeyService.obtenerClave(userId);
-    return { apiKey };
+    console.log('REQ.USER:', req.user);
+    const userId = req.user.userId;
+    if (!userId) {
+      throw new BadRequestException('El token no contiene userId');
+    }
+    return { apiKey: await this.apiKeyService.obtenerClave(userId) };
+
   }
 }
