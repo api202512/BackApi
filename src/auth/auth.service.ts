@@ -26,7 +26,7 @@ export class AuthService {
     };
 
     return {
-      access_token: this.jwtService.sign(payload),
+      token: this.jwtService.sign(payload),
       usuario, // esto es opcional para frontend
     };
   }
