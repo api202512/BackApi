@@ -20,8 +20,6 @@ export class ApiKeyGuard implements CanActivate {
     if (!apiKey || !apiKey.isActive) {
       throw new UnauthorizedException('API Key inválida o inactiva');
     }
-
-    // Guardamos info útil para registrar uso después
     request.apiKeyId = apiKey._id;
     request.apiKeyUserId = apiKey.userId;
 

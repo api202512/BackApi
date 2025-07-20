@@ -27,7 +27,7 @@ export class ApiKeyService {
       const nuevaKey = uuidv4();
 
       const creada = await this.apiKeyModel.create({
-        userId: objectId, // ✅ ya convertido correctamente
+        userId: objectId,
         apiKey: nuevaKey,
         isActive: true,
         createdAt: new Date(),

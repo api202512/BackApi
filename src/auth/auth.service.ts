@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginService } from './../login/services/login.service';
 import * as bcrypt from 'bcryptjs';
-import { use } from 'passport';
 
 @Injectable()
 export class AuthService {
@@ -21,14 +20,14 @@ export class AuthService {
 
   async login(usuario: any) {
     const payload = {
-      userId: usuario._id,  // 👈 Asegúrate que este `_id` venga del mismo modelo referenciado en ApiKey
+      userId: usuario._id, 
       email: usuario.email,
       rol: usuario.rol
     };
 
     return {
       token: this.jwtService.sign(payload),
-      usuario, // esto es opcional para frontend
+      usuario,
     };
   }
 }

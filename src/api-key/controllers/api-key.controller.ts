@@ -10,7 +10,7 @@ export class ApiKeyController {
   @UseGuards(JwtAuthGuard)
   async obtenerApiKey(@Request() req) {
     console.log('🟢 REQ.USER:', req.user);
-    const userId = req.user.userId; // 👈 DEBE venir de la estrategia JWT
+    const userId = req.user.userId;
     const apiKey = await this.apiKeyService.obtenerClave(userId);
     return { apiKey };
   }
