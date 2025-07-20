@@ -1,19 +1,20 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 import { ref } from 'process';
+import { Login } from 'src/login/schemas/login.schema';
 
 export type ApiUsoDocument = ApiUso & Document;
 
 @Schema()
 export class ApiUso {
-  @Prop({ required: true, type: Types.ObjectId, ref: 'Logins' })
+  @Prop({ type: Types.ObjectId, ref: 'Login', required: true })
   userId: Types.ObjectId;
 
-  @Prop({ required: true, type: String, ref: 'Logins' })
-  email: string;
+  @Prop({ type: Types.ObjectId, ref: 'Login', required: true })
+  email: Types.ObjectId;
 
-  @Prop({ required: true, type: Types.ObjectId, ref: 'ApiKeys' })
-  apiKey: Types.ObjectId;
+  @Prop({ type: Types.ObjectId, ref: 'ApiKey', required: true })
+  apiKey: string;
 
   @Prop({ required: true })
   endpoint: string;

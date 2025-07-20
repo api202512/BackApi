@@ -42,8 +42,10 @@ export class ApiKeyService {
   }
 
   async validarClave(apiKey: string) {
-    const registro = await this.apiKeyModel.findOne({ apiKey }).populate('userId');
-    return registro; 
+    const registro = await this.apiKeyModel
+      .findOne({ apiKey })
+      .populate('userId', 'email'); // asegúrate de incluir 'email'
+    return registro;
 }
 
 }

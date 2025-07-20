@@ -2,7 +2,12 @@ import { ApiKeyModule } from './api-key/api-key.module';
 import { ApiUsoModule } from './apiuso/api-uso.module';
 import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
-import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { 
+  Module, 
+  NestModule, 
+  MiddlewareConsumer, 
+  RequestMethod 
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
@@ -47,7 +52,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ApiKeyMiddleware)
-      .forRoutes('api/public'); // Solo se aplica a rutas bajo /api/public
-      // o usa .forRoutes('*') para aplicarlo a TODAS las rutas
+      .forRoutes({ path: 'api/publico/*', method: RequestMethod.ALL });
   }
 }

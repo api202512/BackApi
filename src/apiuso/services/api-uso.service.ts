@@ -7,24 +7,25 @@ import { Login } from 'src/login/schemas/login.schema';
 @Injectable()
 export class ApiUsoService {
   constructor(
-    @InjectModel(Login.name) private userModel: Model<Login>,
     @InjectModel(ApiUso.name) private usoModel: Model<ApiUso>,
   ) {}
 
-  async registrarUso(usuarioId: string, apiKey: string, endpoint: string) {
-    const registro = new this.usoModel({
-      usuario: usuarioId,
-      apiKey,
-      endpoint,
+  async registrarUso(data: {
+    userId: string;
+    email: string;
+    apiKey: string;
+    endpoint: string;
+  }) {
+    await this.usoModel.create({
+      ...data,
+      fecha: new Date(),
     });
-
-    return await registro.save();
   }
 
-  async obtenerRegistrosUso() {
-    return this.usoModel.find()
-      .populate('usuario', 'nombre email')
-      .sort({ fecha: -1 })
-      .exec();
+  async obtenerTodos() {
+    return this.usoModel.find().sort({ fecha: -1 }).exec();
   }
 }
+
+
+

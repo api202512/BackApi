@@ -12,8 +12,8 @@ import { Login, LoginSchema } from '../login/schemas/login.schema';
       { name: Login.name, schema: LoginSchema }
     ])
   ],
-  exports: [MongooseModule, ApiUsoService],
   controllers: [ApiUsoController],
-  providers: [ApiUsoService]
+  providers: [ApiUsoService],
+  exports: [MongooseModule, ApiUsoService]
 })
 export class ApiUsoModule {}

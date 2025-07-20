@@ -12,6 +12,6 @@ export class ApiUsoController {
   @Roles('admin')
   @Get()
   async getRegistrosUso() {
-    return this.apiUsoService.obtenerRegistrosUso();
+    return this.apiUsoService.obtenerTodos();
   }
 }
