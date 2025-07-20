@@ -20,14 +20,14 @@ export class AuthService {
 
   async login(usuario: any) {
     const payload = {
-      userId: usuario._id, 
+      userId: usuario.userId,  // 👈 Asegúrate que este `_id` venga del mismo modelo referenciado en ApiKey
       email: usuario.email,
       rol: usuario.rol
     };
 
     return {
-      token: this.jwtService.sign(payload),
-      usuario,
+      access_token: this.jwtService.sign(payload),
+      usuario, // esto es opcional para frontend
     };
   }
 }
