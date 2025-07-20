@@ -7,13 +7,13 @@ import { Types } from 'mongoose';
 
 @Injectable()
 export class ApiKeyService {
-  constructor(
-    @InjectModel(ApiKey.name) private apiKeyModel: Model<ApiKey>,
-  ) {}
+  constructor(@InjectModel(ApiKey.name) private apiKeyModel: Model<ApiKey>) {}
 
   async obtenerClave(userId: string): Promise<string> {
     try {
-      const objectId = Types.ObjectId.isValid(userId) ? new Types.ObjectId(userId) : userId;
+      const objectId = Types.ObjectId.isValid(userId)
+        ? new Types.ObjectId(userId)
+        : userId;
 
       console.log('🔍 Buscando API key para userId:', objectId);
 

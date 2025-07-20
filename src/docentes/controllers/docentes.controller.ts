@@ -1,4 +1,4 @@
-import { 
+import {
   Controller,
   Get,
   Query,
@@ -19,29 +19,26 @@ export class DocentesController {
   constructor(private readonly docenteService: DocentesService) {}
 
   @Get()
-  getDocentes(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-  ) {
+  getDocentes(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.docenteService.findAll();
   }
-  
+
   @Get('filter')
   getFilter() {
     return { message: 'yo soy un filtro de docentes' };
   }
-  
+
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   getOne(@Param('id', ParseMongoIdPipe) id: string) {
     return this.docenteService.findOne(id);
   }
-  
+
   @Post()
   create(@Body() payload: DocenteDto) {
     return this.docenteService.create(payload);
   }
-  
+
   @Put(':id')
   update(
     @Param('id', ParseMongoIdPipe) id: string,
@@ -49,7 +46,7 @@ export class DocentesController {
   ) {
     return this.docenteService.update(id, payload);
   }
-  
+
   @Delete(':id')
   delete(@Param('id', ParseMongoIdPipe) id: string) {
     return this.docenteService.remove(id);

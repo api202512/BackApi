@@ -11,22 +11,19 @@ import { ApiKeyModule } from './../api-key/api-key.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Login, LoginSchema } from './../login/schemas/login.schema';
 
-
 @Module({
-    imports: [
-        PassportModule,
-        ApiKeyModule,
-        forwardRef(() => LoginModule),
-        JwtModule.register({
-            secret: process.env.JWT_SECRET || 'miclaveultrasecreta',
-            signOptions: { expiresIn: '7d' },
-        }),
-        MongooseModule.forFeature([{ name: Login.name, schema: LoginSchema }
-        ]),
-    ],
-    providers: [
-        AuthService, JwtStrategy, JwtAuthGuard],
-    controllers: [AuthController],
-    exports: [AuthService],
+  imports: [
+    PassportModule,
+    ApiKeyModule,
+    forwardRef(() => LoginModule),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET || 'miclaveultrasecreta',
+      signOptions: { expiresIn: '7d' },
+    }),
+    MongooseModule.forFeature([{ name: Login.name, schema: LoginSchema }]),
+  ],
+  providers: [AuthService, JwtStrategy, JwtAuthGuard],
+  controllers: [AuthController],
+  exports: [AuthService],
 })
 export class AuthModule {}

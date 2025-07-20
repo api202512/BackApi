@@ -1,21 +1,20 @@
-import { 
-  Controller, 
-  Post, 
-  Body, 
-  BadRequestException, 
+import {
+  Controller,
+  Post,
+  Body,
+  BadRequestException,
   UnauthorizedException,
   Get,
   HttpCode,
   HttpStatus,
   Param,
-  Res
 } from '@nestjs/common';
 import { LoginService } from '../services/login.service';
 import { LoginDto } from './../dtos/login.dtos';
 import { AuthService } from './../../auth/auth.service';
 import { ParseMongoIdPipe } from './../../common/parse-mongo-id/parse-mongo-id.pipe';
 import { RegistroDto } from '../dtos/registro.dtos';
-import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { RegistroAdminDto } from '../dtos/registroadmin.dtos';
 
 @ApiTags('Login')
@@ -23,7 +22,7 @@ import { RegistroAdminDto } from '../dtos/registroadmin.dtos';
 export class LoginController {
   constructor(
     private authService: AuthService,
-    private loginService: LoginService
+    private loginService: LoginService,
   ) {}
 
   @Post('registro')
@@ -37,7 +36,10 @@ export class LoginController {
 
   @Post('login')
   async login(@Body() body: LoginDto) {
-    const user = await this.authService.validarUsuario(body.email, body.password);
+    const user = await this.authService.validarUsuario(
+      body.email,
+      body.password,
+    );
     if (!user) throw new UnauthorizedException('Credenciales inválidas');
     return this.authService.login(user);
   }

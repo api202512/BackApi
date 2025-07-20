@@ -1,4 +1,4 @@
-import { 
+import {
   Controller,
   Get,
   Query,
@@ -17,31 +17,28 @@ import { AdministradorService } from './../services/admin.service';
 @Controller('administrador')
 export class AdministradorController {
   constructor(private readonly adminService: AdministradorService) {}
-  
+
   @Get()
-  getAdmin(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-  ) {
+  getAdmin(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.adminService.findAll();
   }
-  
+
   @Get('filter')
   getFilter() {
     return { message: 'yo soy un filtro de usuarios' };
   }
-  
+
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   getOne(@Param('id', ParseMongoIdPipe) id: string) {
     return this.adminService.findOne(id);
   }
-  
+
   @Post()
   create(@Body() payload: AdministradorDto) {
     return this.adminService.create(payload);
   }
-  
+
   @Put(':id')
   update(
     @Param('id', ParseMongoIdPipe) id: string,
@@ -49,7 +46,7 @@ export class AdministradorController {
   ) {
     return this.adminService.update(id, payload);
   }
-  
+
   @Delete(':id')
   delete(@Param('id', ParseMongoIdPipe) id: string) {
     return this.adminService.remove(id);

@@ -14,14 +14,13 @@ export class Login {
   @Prop({ required: true })
   password: string;
 
-  @Prop({ 
-    required: true, 
-    enum: ['admin', 'usuario'], 
-    default: 'usuario', 
-    select: true 
+  @Prop({
+    required: true,
+    enum: ['admin', 'usuario'],
+    default: 'usuario',
+    select: true,
   })
   rol: string;
-
 }
 
 export const LoginSchema = SchemaFactory.createForClass(Login);

@@ -4,7 +4,10 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { LoginController } from './controllers/login.controller';
 import { LoginService } from './services/login.service';
 import { Login, LoginSchema } from './schemas/login.schema';
-import { RegistroAdmin, RegistroAdminSchema } from './schemas/registroAdmin.schema';
+import {
+  RegistroAdmin,
+  RegistroAdminSchema,
+} from './schemas/registroAdmin.schema';
 import { AuthModule } from './../auth/auth.module';
 
 @Module({
@@ -12,7 +15,7 @@ import { AuthModule } from './../auth/auth.module';
     forwardRef(() => AuthModule),
     MongooseModule.forFeature([
       { name: Login.name, schema: LoginSchema },
-      { name: RegistroAdmin.name, schema: RegistroAdminSchema }
+      { name: RegistroAdmin.name, schema: RegistroAdminSchema },
     ]),
   ],
   controllers: [LoginController],

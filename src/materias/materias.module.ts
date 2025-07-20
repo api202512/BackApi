@@ -6,9 +6,7 @@ import { Materia, MateriaSchema } from './schemas/materias.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: Materia.name, schema: MateriaSchema }
-    ]),
+    MongooseModule.forFeature([{ name: Materia.name, schema: MateriaSchema }]),
   ],
   controllers: [MateriasController],
   providers: [MateriasService],

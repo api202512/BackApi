@@ -24,14 +24,14 @@ export class Asignacion {
     type: {
       dia: String,
       horaInicio: String,
-      horaFin: String
-    }
-   })
-   Horarios: {
-    dia: string,
-    horaInicio: string,
-    horaFin: string
-   }
+      horaFin: String,
+    },
+  })
+  Horarios: {
+    dia: string;
+    horaInicio: string;
+    horaFin: string;
+  };
 }
 
 export const AsignacionSchema = SchemaFactory.createForClass(Asignacion);

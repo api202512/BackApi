@@ -7,7 +7,7 @@ export const ROLES_KEY = 'roles';
 
 /**
  * Decorador personalizado que asigna uno o más roles a un controlador o handler.
- * 
+ *
  * Ejemplo de uso:
  * @Roles('admin')
  * @Get()

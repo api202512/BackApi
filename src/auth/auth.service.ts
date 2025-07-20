@@ -34,8 +34,8 @@ export class AuthService {
       usuario: {
         userId,
         email: user.email,
-        rol: user.rol
-      }
+        rol: user.rol,
+      },
     };
   }
 }

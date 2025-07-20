@@ -8,7 +8,6 @@ import {
 import { PartialType } from '@nestjs/mapped-types';
 
 export class AlumnoDto {
-
   @IsMongoId()
   @IsNotEmpty()
   readonly usuarioId: string;

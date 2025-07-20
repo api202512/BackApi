@@ -1,16 +1,7 @@
-import { 
-  IsString, 
-  IsNotEmpty, 
-  IsNumber, 
-  IsMongoId, 
-  IsEnum,
-  IsDateString,
-  MinLength
-} from 'class-validator';
+import { IsString, IsNotEmpty, MinLength } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class RegistroDto {
-  
   @IsString()
   @IsNotEmpty()
   readonly nombre: string;

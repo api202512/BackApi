@@ -1,15 +1,7 @@
-import { 
-  IsString, 
-  IsNotEmpty, 
-  IsNumber, 
-  IsMongoId, 
-  IsEnum,
-  IsDateString
-} from 'class-validator';
+import { IsString, IsNotEmpty } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class LoginDto {
-
   @IsString()
   @IsNotEmpty()
   readonly email: string;

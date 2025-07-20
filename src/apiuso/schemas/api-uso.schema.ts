@@ -6,10 +6,10 @@ export type ApiUsoDocument = ApiUso & Document;
 @Schema()
 export class ApiUso {
   @Prop({ type: Types.ObjectId, ref: 'Login', required: true })
-  userId: Types.ObjectId; 
+  userId: Types.ObjectId;
 
   @Prop({ required: true })
-  email: string; 
+  email: string;
 
   @Prop({ required: true })
   apiKey: string;
@@ -20,6 +20,5 @@ export class ApiUso {
   @Prop({ default: Date.now })
   fecha: Date;
 }
-
 
 export const ApiUsoSchema = SchemaFactory.createForClass(ApiUso);

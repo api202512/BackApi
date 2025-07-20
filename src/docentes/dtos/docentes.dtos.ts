@@ -1,9 +1,9 @@
-import { 
-  IsMongoId, 
-  IsString, 
-  IsNotEmpty, 
-  IsDateString, 
-  IsNumber 
+import {
+  IsMongoId,
+  IsString,
+  IsNotEmpty,
+  IsDateString,
+  IsNumber,
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 

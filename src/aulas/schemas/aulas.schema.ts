@@ -4,9 +4,9 @@ import { Document } from 'mongoose';
 export type AulaDocument = Aula & Document;
 
 export enum RolEnum {
-    AULA = 'AULA',
-    LABORATORIO = 'LABORATORIO',
-    AUDITORIO = 'AUDITORIO',
+  AULA = 'AULA',
+  LABORATORIO = 'LABORATORIO',
+  AUDITORIO = 'AUDITORIO',
 }
 
 @Schema()

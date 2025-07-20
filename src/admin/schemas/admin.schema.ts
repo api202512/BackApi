@@ -9,4 +9,5 @@ export class Administradores {
   usuarioId: string;
 }
 
-export const AdministradoresSchema = SchemaFactory.createForClass(Administradores);
+export const AdministradoresSchema =
+  SchemaFactory.createForClass(Administradores);

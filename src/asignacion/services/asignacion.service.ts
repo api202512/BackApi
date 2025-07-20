@@ -7,7 +7,8 @@ import { AsignacionDto, UpdateAsignacionDto } from '../dtos/asignacion.dtos';
 @Injectable()
 export class AsignacionService {
   constructor(
-    @InjectModel(Asignacion.name) private readonly asignacionModel: Model<Asignacion>,
+    @InjectModel(Asignacion.name)
+    private readonly asignacionModel: Model<Asignacion>,
   ) {}
 
   async findAll() {

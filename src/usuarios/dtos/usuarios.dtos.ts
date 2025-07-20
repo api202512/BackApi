@@ -1,13 +1,13 @@
-import { 
-  IsString, 
-  IsEmail, 
-  IsEnum, 
+import {
+  IsString,
+  IsEmail,
+  IsEnum,
   IsBoolean,
-  IsNotEmpty, 
-  MinLength, 
-  IsOptional, 
-  IsDateString, 
-  ValidateNested 
+  IsNotEmpty,
+  MinLength,
+  IsOptional,
+  IsDateString,
+  ValidateNested,
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';

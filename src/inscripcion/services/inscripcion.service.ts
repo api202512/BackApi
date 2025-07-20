@@ -2,12 +2,16 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Inscripcion } from '../schemas/inscripcion.schema';
-import { InscripcionDto, UpdateInscripcionDto } from '../dtos/inscripciones.dtos';
+import {
+  InscripcionDto,
+  UpdateInscripcionDto,
+} from '../dtos/inscripciones.dtos';
 
 @Injectable()
 export class InscripcionService {
   constructor(
-    @InjectModel(Inscripcion.name) private readonly inscripcionModel: Model<Inscripcion>,
+    @InjectModel(Inscripcion.name)
+    private readonly inscripcionModel: Model<Inscripcion>,
   ) {}
 
   async findAll() {
@@ -38,7 +42,9 @@ export class InscripcionService {
   }
 
   async remove(id: string) {
-    const inscripcion = await this.inscripcionModel.findByIdAndDelete(id).exec();
+    const inscripcion = await this.inscripcionModel
+      .findByIdAndDelete(id)
+      .exec();
     if (!inscripcion) {
       throw new NotFoundException(`Inscripcion con ID ${id} no encontrado`);
     }

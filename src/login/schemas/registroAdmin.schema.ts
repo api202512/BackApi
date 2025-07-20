@@ -17,11 +17,11 @@ export class RegistroAdmin {
   @Prop({ required: true })
   claveSecreta: string;
 
-  @Prop({ 
-    required: true, 
-    enum: ['admin', 'usuario'], 
-    default: 'admin', 
-    select: true 
+  @Prop({
+    required: true,
+    enum: ['admin', 'usuario'],
+    default: 'admin',
+    select: true,
   })
   rol: string;
 }

@@ -11,7 +11,10 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 
-import { InscripcionDto, UpdateInscripcionDto } from '../dtos/inscripciones.dtos';
+import {
+  InscripcionDto,
+  UpdateInscripcionDto,
+} from '../dtos/inscripciones.dtos';
 import { ParseMongoIdPipe } from './../../common/parse-mongo-id/parse-mongo-id.pipe';
 import { InscripcionService } from '../services/inscripcion.service';
 
@@ -20,10 +23,7 @@ export class InscripcionController {
   constructor(private readonly inscripcionService: InscripcionService) {}
 
   @Get()
-  getInscripciones(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-  ) {
+  getInscripciones(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.inscripcionService.findAll();
   }
 

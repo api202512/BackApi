@@ -7,7 +7,7 @@ export enum EstatusAlumnoEnum {
   ACTIVO = 'ACTIVO',
   BAJA_TEMPORAL = 'BAJA_TEMPORAL',
   BAJA_DEFINITIVA = 'BAJA_DEFINITIVA',
-  EGRESADO = 'EGRESADO'
+  EGRESADO = 'EGRESADO',
 }
 
 @Schema()

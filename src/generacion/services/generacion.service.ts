@@ -7,7 +7,8 @@ import { GeneracionDto, UpdateGeneracionDto } from '../dtos/generacion.dtos';
 @Injectable()
 export class GeneracionService {
   constructor(
-    @InjectModel(Generacion.name) private readonly generacionModel: Model<Generacion>,
+    @InjectModel(Generacion.name)
+    private readonly generacionModel: Model<Generacion>,
   ) {}
 
   async findAll() {
@@ -28,7 +29,7 @@ export class GeneracionService {
   }
 
   async update(id: string, payload: UpdateGeneracionDto) {
-    const generacion = await this.generacionModel   
+    const generacion = await this.generacionModel
       .findByIdAndUpdate(id, payload, { new: true })
       .exec();
     if (!generacion) {

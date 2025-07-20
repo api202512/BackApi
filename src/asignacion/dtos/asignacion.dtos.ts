@@ -1,8 +1,8 @@
-import { 
-  IsString, 
-  IsNotEmpty, 
-  IsMongoId, 
-  ValidateNested
+import {
+  IsString,
+  IsNotEmpty,
+  IsMongoId,
+  ValidateNested,
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';
@@ -36,7 +36,7 @@ export class AsignacionDto {
 
   @IsMongoId()
   @IsNotEmpty()
-  readonly cicloEscolarId: string
+  readonly cicloEscolarId: string;
 
   @IsString()
   @IsNotEmpty()

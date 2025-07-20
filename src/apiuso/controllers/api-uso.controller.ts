@@ -7,7 +7,7 @@ import { RolesGuard } from '../../auth/guards/roles.guard';
 @Controller('api-uso')
 export class ApiUsoController {
   constructor(private readonly apiUsoService: ApiUsoService) {}
-  
+
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('admin')
   @Get()

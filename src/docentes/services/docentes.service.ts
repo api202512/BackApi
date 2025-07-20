@@ -9,11 +9,11 @@ export class DocentesService {
   constructor(
     @InjectModel(Docentes.name) private readonly docenteModel: Model<Docentes>,
   ) {}
-  
+
   async findAll() {
     return this.docenteModel.find().exec();
   }
-  
+
   async findOne(id: string) {
     const docente = await this.docenteModel.findById(id).exec();
     if (!docente) {
@@ -36,7 +36,7 @@ export class DocentesService {
     }
     return docente;
   }
-  
+
   async remove(id: string) {
     const docente = await this.docenteModel.findByIdAndDelete(id).exec();
     if (!docente) {

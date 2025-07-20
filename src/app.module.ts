@@ -2,11 +2,11 @@ import { ApiKeyModule } from './api-key/api-key.module';
 import { ApiUsoModule } from './apiuso/api-uso.module';
 import { LoginModule } from './login/login.module';
 import { AuthModule } from './auth/auth.module';
-import { 
-  Module, 
-  NestModule, 
-  MiddlewareConsumer, 
-  RequestMethod 
+import {
+  Module,
+  NestModule,
+  MiddlewareConsumer,
+  RequestMethod,
 } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -43,22 +43,15 @@ import { ApiKeyMiddleware } from './common/parse-mongo-id/middleware/api-key.mid
     UsuariosModule,
     DocentesModule,
     AlumnosModule,
-    MateriasModule
+    MateriasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ApiKeyMiddleware)
-      .forRoutes(
-        'usuarios',
-        'materias',
-        'ciclo-escolar',
-        'aulas',
-        'alumno'
-      );
+      .forRoutes('usuarios', 'materias', 'ciclo-escolar', 'aulas', 'alumno');
   }
 }

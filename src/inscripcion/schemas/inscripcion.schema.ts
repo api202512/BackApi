@@ -25,15 +25,13 @@ export class Inscripcion {
 
   @Prop({ required: true })
   fechaInscripcion: Date;
-  
+
   @Prop({ required: true })
   fechaCalificacion: Date;
 
-  
   @Prop({ required: true })
   intentos: number;
 
-  
   @Prop({ required: true })
   observaciones: string;
 }

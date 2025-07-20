@@ -20,10 +20,7 @@ export class GeneracionController {
   constructor(private readonly generacionService: GeneracionService) {}
 
   @Get()
-  getGeneraciones(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-  ) {
+  getGeneraciones(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.generacionService.findAll();
   }
 

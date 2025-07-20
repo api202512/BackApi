@@ -7,13 +7,13 @@ import { Login, LoginSchema } from '../login/schemas/login.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([ 
-      {name: ApiUso.name, schema: ApiUsoSchema },
-      { name: Login.name, schema: LoginSchema }
-    ])
+    MongooseModule.forFeature([
+      { name: ApiUso.name, schema: ApiUsoSchema },
+      { name: Login.name, schema: LoginSchema },
+    ]),
   ],
   controllers: [ApiUsoController],
   providers: [ApiUsoService],
-  exports: [MongooseModule, ApiUsoService]
+  exports: [MongooseModule, ApiUsoService],
 })
 export class ApiUsoModule {}

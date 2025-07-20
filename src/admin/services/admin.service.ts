@@ -7,13 +7,14 @@ import { AdministradorDto, UpdateAdministradorDto } from './../dtos/admin.dtos';
 @Injectable()
 export class AdministradorService {
   constructor(
-    @InjectModel(Administradores.name) private readonly adminModel: Model<Administradores>,
+    @InjectModel(Administradores.name)
+    private readonly adminModel: Model<Administradores>,
   ) {}
-  
+
   async findAll() {
     return this.adminModel.find().exec();
   }
-  
+
   async findOne(id: string) {
     const admin = await this.adminModel.findById(id).exec();
     if (!admin) {
@@ -26,7 +27,7 @@ export class AdministradorService {
     const newAdmin = new this.adminModel(payload);
     return newAdmin.save();
   }
-  
+
   async update(id: string, payload: UpdateAdministradorDto) {
     const admin = await this.adminModel
       .findByIdAndUpdate(id, payload, { new: true })
@@ -36,7 +37,7 @@ export class AdministradorService {
     }
     return admin;
   }
-  
+
   async remove(id: string) {
     const admin = await this.adminModel.findByIdAndDelete(id).exec();
     if (!admin) {

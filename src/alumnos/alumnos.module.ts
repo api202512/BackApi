@@ -6,9 +6,7 @@ import { Alumno, AlumnoSchema } from './schemas/alumnos.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: Alumno.name, schema: AlumnoSchema },
-    ]),
+    MongooseModule.forFeature([{ name: Alumno.name, schema: AlumnoSchema }]),
   ],
   controllers: [AlumnoController],
   providers: [AlumnoService],

@@ -13,7 +13,7 @@ export class CicloEscolar {
 
   @Prop({ required: true })
   fechaFin: Date;
-  
+
   @Prop({ required: true })
   activo: boolean;
 }

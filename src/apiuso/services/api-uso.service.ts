@@ -5,9 +5,7 @@ import { ApiUso } from 'src/apiuso/schemas/api-uso.schema';
 
 @Injectable()
 export class ApiUsoService {
-  constructor(
-    @InjectModel(ApiUso.name) private usoModel: Model<ApiUso>,
-  ) {}
+  constructor(@InjectModel(ApiUso.name) private usoModel: Model<ApiUso>) {}
 
   async registrarUso(data: {
     userId: string;

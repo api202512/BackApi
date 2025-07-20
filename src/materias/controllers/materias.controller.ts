@@ -20,10 +20,7 @@ export class MateriasController {
   constructor(private readonly materiasService: MateriasService) {}
 
   @Get()
-  getMaterias(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-  ) {
+  getMaterias(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.materiasService.findAll();
   }
 

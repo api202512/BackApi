@@ -1,10 +1,10 @@
-import { 
-  IsString, 
-  IsNotEmpty, 
-  IsNumber, 
-  IsMongoId, 
+import {
+  IsString,
+  IsNotEmpty,
+  IsNumber,
+  IsMongoId,
   IsEnum,
-  IsDateString
+  IsDateString,
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 import { RolEnum } from '../schemas/inscripcion.schema';

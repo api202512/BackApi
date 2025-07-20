@@ -20,10 +20,7 @@ export class AsignacionController {
   constructor(private readonly asignacionService: AsignacionService) {}
 
   @Get()
-  getUsuarios(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-  ) {
+  getUsuarios(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.asignacionService.findAll();
   }
 

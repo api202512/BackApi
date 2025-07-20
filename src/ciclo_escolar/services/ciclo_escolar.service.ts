@@ -2,12 +2,16 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CicloEscolar } from '../schemas/ciclo_escolar.schema';
-import { CicloEscolarDto, UpdateCicloEscolarDto } from '../dtos/ciclo_escolar.dtos';
+import {
+  CicloEscolarDto,
+  UpdateCicloEscolarDto,
+} from '../dtos/ciclo_escolar.dtos';
 
 @Injectable()
 export class CicloEscolarService {
   constructor(
-    @InjectModel(CicloEscolar.name) private readonly cicloEscolarModel: Model<CicloEscolar>,
+    @InjectModel(CicloEscolar.name)
+    private readonly cicloEscolarModel: Model<CicloEscolar>,
   ) {}
 
   async findAll() {
@@ -38,7 +42,9 @@ export class CicloEscolarService {
   }
 
   async remove(id: string) {
-    const cicloEscolar = await this.cicloEscolarModel.findByIdAndDelete(id).exec();
+    const cicloEscolar = await this.cicloEscolarModel
+      .findByIdAndDelete(id)
+      .exec();
     if (!cicloEscolar) {
       throw new NotFoundException(`Ciclo Escolar con ID ${id} no encontrado`);
     }

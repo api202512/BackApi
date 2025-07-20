@@ -20,10 +20,7 @@ export class AlumnoController {
   constructor(private readonly alumnoService: AlumnoService) {}
 
   @Get()
-  getAlumnos(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-  ) {
+  getAlumnos(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.alumnoService.findAll();
   }
 

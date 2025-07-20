@@ -1,9 +1,9 @@
-import { 
-  Controller, 
-  Get, 
-  Request, 
-  UseGuards, 
-  BadRequestException 
+import {
+  Controller,
+  Get,
+  Request,
+  UseGuards,
+  BadRequestException,
 } from '@nestjs/common';
 import { JwtAuthGuard } from './../../auth/guards/jwt-auth.guard';
 import { ApiKeyService } from '../services/api-key.service';
@@ -21,6 +21,5 @@ export class ApiKeyController {
       throw new BadRequestException('El token no contiene userId');
     }
     return { apiKey: await this.apiKeyService.obtenerClave(userId) };
-
   }
 }

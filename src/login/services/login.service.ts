@@ -1,7 +1,7 @@
-import { 
-  Injectable, 
-  BadRequestException, 
-  UnauthorizedException 
+import {
+  Injectable,
+  BadRequestException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -9,7 +9,6 @@ import * as bcrypt from 'bcryptjs';
 import { Login } from '../schemas/login.schema';
 import { RegistroDto } from './../dtos/registro.dtos';
 import { RegistroAdminDto } from './../dtos/registroadmin.dtos';
-
 
 @Injectable()
 export class LoginService {
@@ -51,7 +50,7 @@ export class LoginService {
       nombre: dto.nombre,
       email: dto.email,
       password: hash,
-      rol: 'usuario'
+      rol: 'usuario',
     });
 
     try {
@@ -85,7 +84,7 @@ export class LoginService {
       email: dto.email,
       password: hashedPassword,
       rol: 'admin',
-      claveSecreta: dto.claveSecreta
+      claveSecreta: dto.claveSecreta,
     });
 
     try {

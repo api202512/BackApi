@@ -20,10 +20,7 @@ export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 
   @Get()
-  getUsuarios(
-    @Query('limit') limit = 100,
-    @Query('offset') offset = 0,
-  ) {
+  getUsuarios(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.usuarioService.findAll();
   }
 

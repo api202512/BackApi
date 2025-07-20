@@ -1,10 +1,9 @@
-import { 
-  IsString, 
-  IsNotEmpty, 
-  IsBoolean, 
-  IsNumber, 
-  IsDate, 
-  IsDateString
+import {
+  IsString,
+  IsNotEmpty,
+  IsBoolean,
+  IsNumber,
+  IsDateString,
 } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 

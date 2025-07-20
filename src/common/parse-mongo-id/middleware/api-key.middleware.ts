@@ -1,4 +1,8 @@
-import { Injectable, NestMiddleware, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  NestMiddleware,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import { ApiKeyService } from 'src/api-key/services/api-key.service';
 import { ApiUsoService } from 'src/apiuso/services/api-uso.service';
@@ -29,7 +33,7 @@ export class ApiKeyMiddleware implements NestMiddleware {
       email: (registro.userId as any)?.email ?? '',
       apiKey: apiKey,
       endpoint: req.originalUrl,
-});
+    });
 
     next();
   }

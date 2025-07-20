@@ -14,7 +14,7 @@ export class AulaDto {
   @IsNumber()
   @IsNotEmpty()
   readonly capacidad: number;
-  
+
   @IsEnum(RolEnum)
   readonly tipo: RolEnum;
 }

@@ -47,7 +47,7 @@ export class Usuario {
       ciudad: String,
       estado: String,
       codigoPostal: String,
-    }
+    },
   })
   direccion: {
     calle: string;

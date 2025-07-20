@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsDate, IsBoolean, IsDateString } from 'class-validator';
+import { IsString, IsNotEmpty, IsBoolean, IsDateString } from 'class-validator';
 import { PartialType } from '@nestjs/mapped-types';
 
 export class CicloEscolarDto {

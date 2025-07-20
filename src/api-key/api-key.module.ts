@@ -6,12 +6,10 @@ import { ApiKey, ApiKeySchema } from './schemas/api-key.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: ApiKey.name, schema: ApiKeySchema }
-    ])
+    MongooseModule.forFeature([{ name: ApiKey.name, schema: ApiKeySchema }]),
   ],
   controllers: [ApiKeyController],
   providers: [ApiKeyService],
-  exports: [ApiKeyService, MongooseModule] 
+  exports: [ApiKeyService, MongooseModule],
 })
 export class ApiKeyModule {}

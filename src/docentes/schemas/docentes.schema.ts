@@ -5,7 +5,6 @@ export type DocentesDocument = Docentes & Document;
 
 @Schema()
 export class Docentes {
-
   @Prop({ type: Types.ObjectId, ref: 'Usuarios', required: false })
   usuarioId: Types.ObjectId;
 

@@ -6,9 +6,7 @@ import { Aula, AulaSchema } from './schemas/aulas.schema';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([
-      { name: Aula.name, schema: AulaSchema },
-    ]),
+    MongooseModule.forFeature([{ name: Aula.name, schema: AulaSchema }]),
   ],
   controllers: [AulasController],
   providers: [AulasService],
