@@ -1,3 +1,4 @@
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -8,10 +9,13 @@ import {
 import { JwtAuthGuard } from './../../auth/guards/jwt-auth.guard';
 import { ApiKeyService } from '../services/api-key.service';
 
+@ApiTags('Api Key')
 @Controller('apikey')
 export class ApiKeyController {
   constructor(private apiKeyService: ApiKeyService) {}
 
+  @ApiOperation({ summary: 'Obtener datos' })
+  @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
   @Get()
   @UseGuards(JwtAuthGuard)
   async obtenerApiKey(@Request() req) {

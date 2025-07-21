@@ -1,3 +1,4 @@
+import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import { Res, Body, Controller, Post } from '@nestjs/common';
 import { Response } from 'express';
@@ -5,6 +6,7 @@ import { AuthService } from './auth.service';
 import { ApiKeyService } from '../api-key/services/api-key.service';
 import { LoginDto } from './../login/dtos/login.dtos';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -13,6 +15,8 @@ export class AuthController {
     private readonly apiKeyService: ApiKeyService,
   ) {}
 
+  @ApiOperation({ summary: 'Crear un nuevo recurso' })
+  @ApiResponse({ status: 201, description: 'Recurso creado exitosamente' })
   @Post('login')
   async login(@Body() loginDto: LoginDto, @Res() res: Response) {
     const { email, password } = loginDto;
