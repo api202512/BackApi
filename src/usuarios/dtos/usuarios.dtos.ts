@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsString,
   IsEmail,
@@ -10,7 +10,7 @@ import {
   IsDateString,
   ValidateNested,
 } from 'class-validator';
-import { PartialType } from '@nestjs/mapped-types';
+//import { PartialType } from '@nestjs/mapped-types';
 import { Type } from 'class-transformer';
 import { RolEnum } from '../schemas/usuarios.schema';
 

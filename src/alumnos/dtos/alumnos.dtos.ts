@@ -5,8 +5,8 @@ import {
   IsMongoId,
   IsDateString,
 } from 'class-validator';
-import { PartialType } from '@nestjs/mapped-types';
-import { ApiProperty } from '@nestjs/swagger';
+//import { PartialType } from '@nestjs/mapped-types';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 
 export class AlumnoDto {
   @IsMongoId()

@@ -14,6 +14,7 @@ export class ApiUsoController {
   @Roles('admin')
   @ApiOperation({ summary: 'Obtener datos' })
   @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
+  @ApiResponse({ status: 401, description: 'No autorizado' })
   @Get()
   async getRegistrosUso() {
     return this.apiUsoService.obtenerTodos();

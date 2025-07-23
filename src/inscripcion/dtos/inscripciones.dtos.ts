@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
   IsString,
   IsNotEmpty,
@@ -7,7 +7,7 @@ import {
   IsEnum,
   IsDateString,
 } from 'class-validator';
-import { PartialType } from '@nestjs/mapped-types';
+//import { PartialType } from '@nestjs/mapped-types';
 import { RolEnum } from '../schemas/inscripcion.schema';
 
 export class InscripcionDto {

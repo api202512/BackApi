@@ -1,4 +1,10 @@
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiParam,
+} from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -21,40 +27,47 @@ import { GeneracionService } from '../services/generacion.service';
 export class GeneracionController {
   constructor(private readonly generacionService: GeneracionService) {}
 
-  @ApiOperation({ summary: 'Obtener datos' })
+  @ApiOperation({ summary: 'Obtener todas las generaciones' })
   @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
+  @ApiResponse({ status: 404, description: 'Datos no encontrado' })
   @Get()
   getGeneraciones(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.generacionService.findAll();
   }
 
-  @ApiOperation({ summary: 'Obtener datos' })
-  @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
-  @Get('filter')
-  getFilter() {
-    return { message: 'yo soy un filtro de generaciones' };
-  }
-
-  @ApiOperation({ summary: 'Obtener datos' })
-  @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
+  @ApiOperation({ summary: 'Obtener una generacion por su ID' })
+  @ApiParam({ name: 'id', description: 'ID de la generacion' })
+  @ApiResponse({
+    status: 200,
+    description: 'Generacion obtenido correctamente',
+  })
+  @ApiResponse({ status: 404, description: 'Generacion no encontrado' })
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   getOne(@Param('id', ParseMongoIdPipe) id: string) {
     return this.generacionService.findOne(id);
   }
 
-  @ApiOperation({ summary: 'Crear un nuevo recurso' })
-  @ApiResponse({ status: 201, description: 'Recurso creado exitosamente' })
+  @ApiOperation({ summary: 'Crear una nueva generacion' })
+  @ApiBody({ type: GeneracionDto })
+  @ApiResponse({ status: 201, description: 'Generacion creada exitosamente' })
+  @ApiResponse({ status: 400, description: 'Datos inválidos' })
   @Post()
   create(@Body() payload: GeneracionDto) {
     return this.generacionService.create(payload);
   }
 
-  @ApiOperation({ summary: 'Actualizar un recurso existente' })
+  @ApiOperation({ summary: 'Actualizar una generacion por su ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID de la generacion a actualizar',
+    example: '686ae75f15a92f4fb9c30653',
+  })
   @ApiResponse({
     status: 200,
-    description: 'Recurso actualizado correctamente',
+    description: 'Generacion actualizado correctamente',
   })
+  @ApiResponse({ status: 400, description: 'Datos inválidos' })
   @Put(':id')
   update(
     @Param('id', ParseMongoIdPipe) id: string,
@@ -63,8 +76,28 @@ export class GeneracionController {
     return this.generacionService.update(id, payload);
   }
 
-  @ApiOperation({ summary: 'Eliminar un recurso' })
-  @ApiResponse({ status: 200, description: 'Recurso eliminado correctamente' })
+  @ApiOperation({ summary: 'Eliminar una generacion por su ID' })
+  @ApiParam({ name: 'id', description: 'ID de la generacion a eliminar' })
+  @ApiResponse({
+    status: 200,
+    description: 'Generacion eliminado correctamente',
+  })
+  @ApiResponse({ status: 404, description: 'Generacion no encontrado' })
+  @ApiBody({
+    description: 'Eliminar una generacion',
+    examples: {
+      ejemplo: {
+        summary: 'Ejemplo de eliminacion',
+        value: {
+          docenteId: '686aeb0bba779ddc4b6f4b3c',
+          materiaId: '686ae83ac1345367edadeb46',
+          aulaId: '686ae6c8559fa32d21f4607c',
+          cicloEscolarId: '686ae812c1345367edadeb3e',
+          grupo: 'B',
+        },
+      },
+    },
+  })
   @Delete(':id')
   delete(@Param('id', ParseMongoIdPipe) id: string) {
     return this.generacionService.remove(id);

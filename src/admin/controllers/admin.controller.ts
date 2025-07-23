@@ -1,4 +1,10 @@
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiParam,
+} from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -27,34 +33,45 @@ export class AdministradorController {
     return this.adminService.findAll();
   }
 
-  @ApiOperation({ summary: 'Obtener datos' })
-  @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
-  @Get('filter')
-  getFilter() {
-    return { message: 'yo soy un filtro de usuarios' };
-  }
-
-  @ApiOperation({ summary: 'Obtener datos' })
-  @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
   @Get(':id')
+  @ApiOperation({ summary: 'Obtener un admin por ID' })
+  @ApiParam({ name: 'id', description: 'ID de admin' })
+  @ApiResponse({ status: 200, description: 'Admin encontrado' })
+  @ApiResponse({ status: 404, description: 'Admin no encontrado' })
   @HttpCode(HttpStatus.ACCEPTED)
   getOne(@Param('id', ParseMongoIdPipe) id: string) {
     return this.adminService.findOne(id);
   }
 
-  @ApiOperation({ summary: 'Crear un nuevo recurso' })
-  @ApiResponse({ status: 201, description: 'Recurso creado exitosamente' })
   @Post()
+  @ApiOperation({ summary: 'Crear un nuevo admin' })
+  @ApiBody({ type: AdministradorDto })
+  @ApiResponse({ status: 201, description: 'Admin creado exitosamente' })
+  @ApiResponse({ status: 400, description: 'Datos inválidos' })
   create(@Body() payload: AdministradorDto) {
     return this.adminService.create(payload);
   }
 
-  @ApiOperation({ summary: 'Actualizar un recurso existente' })
+  @Put(':id')
+  @ApiOperation({ summary: 'Actualizar un admin existente' })
+  @ApiParam({ name: 'id', description: 'ID del alumno a actualizar' })
+  @ApiBody({
+    type: UpdateAdministradorDto,
+    examples: {
+      ejemplo: {
+        value: {
+          nombre: 'Carlos Pérez',
+          correo: 'admin@uthh.edu.mx',
+          rol: 'admin',
+        },
+      },
+    },
+  })
   @ApiResponse({
     status: 200,
-    description: 'Recurso actualizado correctamente',
+    description: 'Admin actualizado correctamente',
   })
-  @Put(':id')
+  @ApiResponse({ status: 404, description: 'Admin no encontrado' })
   update(
     @Param('id', ParseMongoIdPipe) id: string,
     @Body() payload: UpdateAdministradorDto,

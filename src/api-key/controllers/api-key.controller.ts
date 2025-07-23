@@ -16,6 +16,7 @@ export class ApiKeyController {
 
   @ApiOperation({ summary: 'Obtener datos' })
   @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
+  @ApiResponse({ status: 401, description: 'No autorizado' })
   @Get()
   @UseGuards(JwtAuthGuard)
   async obtenerApiKey(@Request() req) {

@@ -16,7 +16,8 @@ export class AuthController {
   ) {}
 
   @ApiOperation({ summary: 'Crear un nuevo recurso' })
-  @ApiResponse({ status: 201, description: 'Recurso creado exitosamente' })
+  @ApiResponse({ status: 201, description: 'Recurso creado correctamente' })
+  @ApiResponse({ status: 400, description: 'Datos inválidos' })
   @Post('login')
   async login(@Body() loginDto: LoginDto, @Res() res: Response) {
     const { email, password } = loginDto;

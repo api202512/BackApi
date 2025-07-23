@@ -1,4 +1,10 @@
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBody,
+  ApiParam,
+} from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -21,40 +27,44 @@ import { MateriasService } from '../services/materias.service';
 export class MateriasController {
   constructor(private readonly materiasService: MateriasService) {}
 
-  @ApiOperation({ summary: 'Obtener datos' })
+  @ApiOperation({ summary: 'Obtener todos las materias' })
   @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
+  @ApiResponse({ status: 404, description: 'Datos no encontrado' })
   @Get()
   getMaterias(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.materiasService.findAll();
   }
 
-  @ApiOperation({ summary: 'Obtener datos' })
-  @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
-  @Get('filter')
-  getFilter() {
-    return { message: 'yo soy un filtro de materias' };
-  }
-
-  @ApiOperation({ summary: 'Obtener datos' })
-  @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
+  @ApiOperation({ summary: 'Obtener un materia por su ID' })
+  @ApiParam({ name: 'id', description: 'ID del materia' })
+  @ApiResponse({ status: 200, description: 'Materia obtenido correctamente' })
+  @ApiResponse({ status: 404, description: 'Materia no encontrado' })
   @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
   getOne(@Param('id', ParseMongoIdPipe) id: string) {
     return this.materiasService.findOne(id);
   }
 
-  @ApiOperation({ summary: 'Crear un nuevo recurso' })
-  @ApiResponse({ status: 201, description: 'Recurso creado exitosamente' })
+  @ApiOperation({ summary: 'Crear un nuevo materia' })
+  @ApiBody({ type: MateriaDto })
+  @ApiResponse({ status: 201, description: 'Materia creado correctamente' })
+  @ApiResponse({ status: 400, description: 'Datos inválidos' })
   @Post()
   create(@Body() payload: MateriaDto) {
     return this.materiasService.create(payload);
   }
 
-  @ApiOperation({ summary: 'Actualizar un recurso existente' })
+  @ApiOperation({ summary: 'Actualizar un materia por su ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID del materia a actualizar',
+    example: '686ae83ac1345367edadeb46',
+  })
   @ApiResponse({
     status: 200,
-    description: 'Recurso actualizado correctamente',
+    description: 'Materia actualizado correctamente',
   })
+  @ApiResponse({ status: 400, description: 'Datos inválidos' })
   @Put(':id')
   update(
     @Param('id', ParseMongoIdPipe) id: string,
@@ -63,8 +73,27 @@ export class MateriasController {
     return this.materiasService.update(id, payload);
   }
 
-  @ApiOperation({ summary: 'Eliminar un recurso' })
-  @ApiResponse({ status: 200, description: 'Recurso eliminado correctamente' })
+  @ApiOperation({ summary: 'Eliminar un materia por su ID' })
+  @ApiParam({ name: 'id', description: 'ID del materia a eliminar' })
+  @ApiBody({
+    type: UpdateMateriaDto,
+    examples: {
+      ejemplo: {
+        value: {
+          nombre: 'estructuras de datos',
+          clave: 'IANC33F',
+          descripcion: 'dcecres',
+          cuatrimestre: '3',
+          creditos: '4',
+          horasTeoricas: '19',
+          horasPracticas: '32',
+          activa: true,
+        },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Materia eliminado correctamente' })
+  @ApiResponse({ status: 404, description: 'Materia no encontrado' })
   @Delete(':id')
   delete(@Param('id', ParseMongoIdPipe) id: string) {
     return this.materiasService.remove(id);

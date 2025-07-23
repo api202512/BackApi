@@ -26,7 +26,6 @@ async function bootstrap() {
     new ApiKeyMiddleware(apiKeyService, apiUsoService).use,
   );
   app.enableCors();
-  app.setGlobalPrefix('api');
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
