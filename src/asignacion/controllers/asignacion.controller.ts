@@ -48,7 +48,7 @@ export class AsignacionController {
     return this.asignacionService.findOne(id);
   }
 
-  @ApiOperation({ summary: 'Crear una nueva asignacion por su ID' })
+  @ApiOperation({ summary: 'Crear una nueva asignacion' })
   @ApiBody({ type: AsignacionDto })
   @ApiResponse({ status: 201, description: 'Asignacion creado exitosamente' })
   @ApiResponse({ status: 404, description: 'Datos inválidos' })

@@ -1,15 +1,44 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsMongoId, IsNotEmpty } from 'class-validator';
-//import { PartialType } from '@nestjs/mapped-types';
+import {
+  IsString,
+  IsNotEmpty,
+  IsEmail,
+  MinLength,
+  IsOptional,
+} from 'class-validator';
 
 export class AdministradorDto {
-  @IsMongoId()
-  @ApiProperty({
-    example: '686aea57940becc19b8cd88e',
-    description: 'Descripción de usuarioId',
-  })
+  @IsString()
   @IsNotEmpty()
-  readonly usuarioId: string;
-}
+  @ApiProperty({
+    example: 'Carlos Pérez',
+    description: 'Nombre completo del administrador',
+  })
+  readonly nombre: string;
 
+  @IsEmail()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: 'admin@uthh.edu.mx',
+    description: 'Correo electrónico del administrador',
+  })
+  readonly correo: string;
+
+  @IsString()
+  @MinLength(6)
+  @ApiProperty({
+    example: '123456',
+    description: 'Contraseña del administrador (mínimo 6 caracteres)',
+  })
+  readonly contraseña: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty({
+    example: 'admin',
+    description: 'Rol o tipo de administrador',
+    required: false,
+  })
+  readonly rol?: string;
+}
 export class UpdateAdministradorDto extends PartialType(AdministradorDto) {}

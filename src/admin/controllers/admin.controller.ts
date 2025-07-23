@@ -26,15 +26,16 @@ import { AdministradorService } from './../services/admin.service';
 export class AdministradorController {
   constructor(private readonly adminService: AdministradorService) {}
 
-  @ApiOperation({ summary: 'Obtener datos' })
+  @ApiOperation({ summary: 'Obtener todos los admin' })
   @ApiResponse({ status: 200, description: 'Datos obtenidos correctamente' })
+  @ApiResponse({ status: 404, description: 'Datos no encontrado' })
   @Get()
   getAdmin(@Query('limit') limit = 100, @Query('offset') offset = 0) {
     return this.adminService.findAll();
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Obtener un admin por ID' })
+  @ApiOperation({ summary: 'Obtener un admin por su ID' })
   @ApiParam({ name: 'id', description: 'ID de admin' })
   @ApiResponse({ status: 200, description: 'Admin encontrado' })
   @ApiResponse({ status: 404, description: 'Admin no encontrado' })
@@ -53,25 +54,13 @@ export class AdministradorController {
   }
 
   @Put(':id')
-  @ApiOperation({ summary: 'Actualizar un admin existente' })
+  @ApiOperation({ summary: 'Actualizar un admin por su ID' })
   @ApiParam({ name: 'id', description: 'ID del alumno a actualizar' })
-  @ApiBody({
-    type: UpdateAdministradorDto,
-    examples: {
-      ejemplo: {
-        value: {
-          nombre: 'Carlos Pérez',
-          correo: 'admin@uthh.edu.mx',
-          rol: 'admin',
-        },
-      },
-    },
-  })
   @ApiResponse({
     status: 200,
     description: 'Admin actualizado correctamente',
   })
-  @ApiResponse({ status: 404, description: 'Admin no encontrado' })
+  @ApiResponse({ status: 404, description: 'Datos inválidos' })
   update(
     @Param('id', ParseMongoIdPipe) id: string,
     @Body() payload: UpdateAdministradorDto,
@@ -79,8 +68,23 @@ export class AdministradorController {
     return this.adminService.update(id, payload);
   }
 
-  @ApiOperation({ summary: 'Eliminar un recurso' })
-  @ApiResponse({ status: 200, description: 'Recurso eliminado correctamente' })
+  @ApiOperation({ summary: 'Eliminar un admin por su ID' })
+  @ApiBody({
+    description: 'Eliminar un admin',
+    examples: {
+      ejemplo: {
+        summary: 'Ejemplo de eliminacion',
+        value: {
+          nombre: 'Carlos Pérez',
+          correo: 'admin@uthh.edu.mx',
+          contraseña: '******',
+          rol: 'admin',
+        },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Admin eliminado correctamente' })
+  @ApiResponse({ status: 404, description: 'Admin no encontrado' })
   @Delete(':id')
   delete(@Param('id', ParseMongoIdPipe) id: string) {
     return this.adminService.remove(id);

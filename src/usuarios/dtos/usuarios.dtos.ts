@@ -59,7 +59,7 @@ export class UsuarioDto {
   readonly contraseña: string;
 
   @ApiProperty({
-    example: 'ALUMNO, MAESTRO, ADMIN',
+    example: 'ALUMNO, MAESTRO',
     description: 'Descripción de rol',
   })
   @IsEnum(RolEnum)

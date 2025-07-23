@@ -1,12 +1,21 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 
 export type AdministradoresDocument = Administradores & Document;
 
 @Schema()
 export class Administradores {
-  @Prop({ type: Types.ObjectId, ref: 'Usuarios', required: true })
-  usuarioId: string;
+  @Prop({ required: true })
+  nombre: string;
+
+  @Prop({ required: true })
+  correo: string;
+
+  @Prop({ required: true })
+  contraseña: string;
+
+  @Prop({ required: true })
+  rol?: string;
 }
 
 export const AdministradoresSchema =

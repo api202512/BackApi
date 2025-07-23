@@ -4,8 +4,7 @@ import { Document } from 'mongoose';
 export type UsuarioDocument = Usuario & Document;
 
 export enum RolEnum {
-  ADMIN = 'ADMIN',
-  PROFESOR = 'PROFESOR',
+  PROFESOR = 'DOCENTE',
   ALUMNO = 'ALUMNO',
 }
 
