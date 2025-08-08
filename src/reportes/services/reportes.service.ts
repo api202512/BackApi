@@ -24,7 +24,7 @@ export class ReportesService {
     return this.inscripcionModel.aggregate([
       {
         $match: {
-          alumnoId: alumnoId, // como es string en Mongo, lo dejamos así
+          alumnoId: alumnoId,
         },
       },
       {
@@ -49,6 +49,90 @@ export class ReportesService {
       {
         $project: {
           nombreMateria: '$materia.nombre',
+          calificacion: 1,
+          estatus: 1,
+          intentos: 1,
+          observaciones: 1,
+        },
+      },
+    ]);
+  }
+
+  async reporteMateriasPorDocente(docenteId: string) {
+    if (!Types.ObjectId.isValid(docenteId)) {
+      throw new BadRequestException('ID del docente inválido');
+    }
+
+    return this.inscripcionModel.aggregate([
+      {
+        $match: {
+          docenteId: docenteId,
+        },
+      },
+      {
+        $lookup: {
+          from: 'materias',
+          let: { materiaId: '$asignacionMateriaId' },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ['$_id', { $toObjectId: '$$materiaId' }],
+                },
+              },
+            },
+          ],
+          as: 'materia',
+        },
+      },
+      {
+        $unwind: '$materia',
+      },
+      {
+        $project: {
+          nombreMateria: '$materia.nombre',
+          calificacion: 1,
+          estatus: 1,
+          intentos: 1,
+          observaciones: 1,
+        },
+      },
+    ]);
+  }
+
+  async reporteAlumnosPorMateria(materiaId: string) {
+    if (!Types.ObjectId.isValid(materiaId)) {
+      throw new BadRequestException('ID de la materia inválido');
+    }
+
+    return this.inscripcionModel.aggregate([
+      {
+        $match: {
+          asignacionMateriaId: materiaId,
+        },
+      },
+      {
+        $lookup: {
+          from: 'alumnos',
+          let: { alumnoId: '$alumnoId' },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ['$_id', { $toObjectId: '$$alumnoId' }],
+                },
+              },
+            },
+          ],
+          as: 'alumno',
+        },
+      },
+      {
+        $unwind: '$alumno',
+      },
+      {
+        $project: {
+          nombreAlumno: '$alumno.nombre',
           calificacion: 1,
           estatus: 1,
           intentos: 1,
