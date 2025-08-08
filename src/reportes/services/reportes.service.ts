@@ -100,8 +100,12 @@ export class ReportesService {
   }
 
   async reporteAlumnosPorMateria(materiaId: string) {
+    if (!Types.ObjectId.isValid(materiaId)) {
+      throw new BadRequestException('ID de materia inválido');
+    }
+
     return this.inscripcionModel.aggregate([
-      { $match: { asignacionMateriaId: materiaId } }, // <- string exacto
+      { $match: { asignacionMateriaId: materiaId } }, // <— campo correcto
       {
         $lookup: {
           from: 'alumnos',
@@ -120,7 +124,7 @@ export class ReportesService {
       {
         $project: {
           _id: 0,
-          alumnoId: '$alumno._id',
+          nombreAlumno: '$alumno.nombre',
           calificacion: 1,
           estatus: 1,
           intentos: 1,
