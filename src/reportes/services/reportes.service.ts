@@ -100,14 +100,8 @@ export class ReportesService {
   }
 
   async reporteAlumnosPorMateria(materiaId: string) {
-    if (!Types.ObjectId.isValid(materiaId)) {
-      throw new BadRequestException('ID de materia inválido');
-    }
-
     return this.inscripcionModel.aggregate([
-      {
-        $match: { asignacionMateriaId: materiaId },
-      },
+      { $match: { asignacionMateriaId: materiaId } },
       {
         $lookup: {
           from: 'alumnos',
@@ -118,37 +112,37 @@ export class ReportesService {
                 $expr: { $eq: ['$_id', { $toObjectId: '$$alumnoIdStr' }] },
               },
             },
+            {
+              $lookup: {
+                from: 'usuarios',
+                let: { usuarioId: '$usuarioId' },
+                pipeline: [
+                  {
+                    $match: {
+                      $expr: { $eq: ['$_id', { $toObjectId: '$$usuarioId' }] },
+                    },
+                  },
+                ],
+                as: 'usuario',
+              },
+            },
+            { $unwind: '$usuario' },
           ],
           as: 'alumno',
         },
       },
       { $unwind: '$alumno' },
       {
-        $lookup: {
-          from: 'usuarios',
-          let: { usuarioIdStr: '$alumno.usuarioId' },
-          pipeline: [
-            {
-              $match: {
-                $expr: { $eq: ['$_id', { $toObjectId: '$$usuarioIdStr' }] },
-              },
-            },
-            { $project: { nombreCompleto: 1, correo: 1, matricula: 1 } },
-          ],
-          as: 'usuario',
-        },
-      },
-      { $unwind: { path: '$usuario', preserveNullAndEmptyArrays: true } },
-      {
         $project: {
           _id: 0,
-          alumnoId: 1,
-          nombreAlumno: '$usuario.nombreCompleto',
-          correo: '$usuario.correo',
+          alumnoId: '$alumno._id',
+          nombreAlumno: '$alumno.usuario.nombreCompleto',
           calificacion: 1,
           estatus: 1,
           intentos: 1,
           observaciones: 1,
+          fechaInscripcion: 1,
+          fechaCalificacion: 1,
         },
       },
     ]);
