@@ -18,7 +18,7 @@ export class ReportesService {
 
   async reporteMateriasPorAlumno(alumnoId: string) {
     if (!Types.ObjectId.isValid(alumnoId)) {
-      throw new BadRequestException('ID de alumno inválido');
+      throw new BadRequestException('ID del alumno inválido');
     }
 
     return this.inscripcionModel.aggregate([
