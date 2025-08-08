@@ -106,32 +106,45 @@ export class ReportesService {
 
     return this.inscripcionModel.aggregate([
       {
-        $match: {
-          materiaId: materiaId,
-        },
+        $match: { asignacionMateriaId: materiaId },
       },
       {
         $lookup: {
           from: 'alumnos',
-          let: { alumnoId: '$alumnoId' },
+          let: { alumnoIdStr: '$alumnoId' },
           pipeline: [
             {
               $match: {
-                $expr: {
-                  $eq: ['$_id', { $toObjectId: '$$alumnoId' }],
-                },
+                $expr: { $eq: ['$_id', { $toObjectId: '$$alumnoIdStr' }] },
               },
             },
           ],
           as: 'alumno',
         },
       },
+      { $unwind: '$alumno' },
       {
-        $unwind: '$alumno',
+        $lookup: {
+          from: 'usuarios',
+          let: { usuarioIdStr: '$alumno.usuarioId' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $eq: ['$_id', { $toObjectId: '$$usuarioIdStr' }] },
+              },
+            },
+            { $project: { nombreCompleto: 1, correo: 1, matricula: 1 } },
+          ],
+          as: 'usuario',
+        },
       },
+      { $unwind: { path: '$usuario', preserveNullAndEmptyArrays: true } },
       {
         $project: {
-          nombreAlumno: '$alumno.nombre',
+          _id: 0,
+          alumnoId: 1,
+          nombreAlumno: '$usuario.nombreCompleto',
+          correo: '$usuario.correo',
           calificacion: 1,
           estatus: 1,
           intentos: 1,
