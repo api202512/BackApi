@@ -16,21 +16,6 @@ export class ReportesService {
     @InjectModel(Inscripcion.name) private inscripcionModel: Model<Inscripcion>,
   ) {}
 
-  async reporteAlumnos() {
-    return this.alumnoModel.find().populate('materias').exec();
-  }
-
-  async reporteMateriasPorCiclo(cicloId: string) {
-    return this.materiaModel
-      .find({ ciclo: cicloId })
-      .populate('docente')
-      .exec();
-  }
-
-  async reporteDocentes() {
-    return this.docenteModel.find().populate('materias').exec();
-  }
-
   async reporteMateriasPorAlumno(alumnoId: string) {
     if (!Types.ObjectId.isValid(alumnoId)) {
       throw new BadRequestException('ID de alumno inválido');
