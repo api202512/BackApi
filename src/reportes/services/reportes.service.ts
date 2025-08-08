@@ -65,29 +65,28 @@ export class ReportesService {
 
     return this.inscripcionModel.aggregate([
       {
+        $lookup: {
+          from: 'asignacions',
+          localField: 'asignacionMateriaId',
+          foreignField: '_id',
+          as: 'asignacion',
+        },
+      },
+      { $unwind: '$asignacion' },
+      {
         $match: {
-          docenteId: docenteId,
+          'asignacion.docenteId': docenteId,
         },
       },
       {
         $lookup: {
           from: 'materias',
-          let: { materiaId: '$asignacionMateriaId' },
-          pipeline: [
-            {
-              $match: {
-                $expr: {
-                  $eq: ['$_id', { $toObjectId: '$$materiaId' }],
-                },
-              },
-            },
-          ],
+          localField: 'asignacion.materiaId',
+          foreignField: '_id',
           as: 'materia',
         },
       },
-      {
-        $unwind: '$materia',
-      },
+      { $unwind: '$materia' },
       {
         $project: {
           nombreMateria: '$materia.nombre',
