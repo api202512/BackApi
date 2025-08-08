@@ -101,32 +101,17 @@ export class ReportesService {
 
   async reporteAlumnosPorMateria(materiaId: string) {
     return this.inscripcionModel.aggregate([
-      { $match: { asignacionMateriaId: materiaId } },
+      { $match: { asignacionMateriaId: materiaId } }, // <- string exacto
       {
         $lookup: {
           from: 'alumnos',
-          let: { alumnoIdStr: '$alumnoId' },
+          let: { alumnoIdStr: '$alumnoId' }, // alumnoId es string en inscripcions
           pipeline: [
             {
               $match: {
                 $expr: { $eq: ['$_id', { $toObjectId: '$$alumnoIdStr' }] },
               },
             },
-            {
-              $lookup: {
-                from: 'usuarios',
-                let: { usuarioId: '$usuarioId' },
-                pipeline: [
-                  {
-                    $match: {
-                      $expr: { $eq: ['$_id', { $toObjectId: '$$usuarioId' }] },
-                    },
-                  },
-                ],
-                as: 'usuario',
-              },
-            },
-            { $unwind: '$usuario' },
           ],
           as: 'alumno',
         },
@@ -136,7 +121,6 @@ export class ReportesService {
         $project: {
           _id: 0,
           alumnoId: '$alumno._id',
-          nombreAlumno: '$alumno.usuario.nombreCompleto',
           calificacion: 1,
           estatus: 1,
           intentos: 1,
