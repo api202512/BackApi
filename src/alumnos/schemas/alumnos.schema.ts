@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
+import mongoose from 'mongoose';
+import { Materia } from './../../materias/schemas/materias.schema';
 
 export type AlumnoDocument = Alumno & Document;
 
@@ -38,6 +40,9 @@ export class Alumno {
 
   @Prop({ required: true })
   fechaEgreso: Date;
+
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Materia' }] })
+  materias: Materia[];
 }
 
 export const AlumnoSchema = SchemaFactory.createForClass(Alumno);

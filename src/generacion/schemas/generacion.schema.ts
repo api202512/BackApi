@@ -5,7 +5,7 @@ export type GeneracionDocument = Generacion & Document;
 
 @Schema()
 export class Generacion {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   anioInicio: Date;
 
   @Prop({ required: true })

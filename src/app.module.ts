@@ -1,3 +1,4 @@
+import { ReportesModule } from './reportes/reportes.module';
 import { ApiKeyModule } from './api-key/api-key.module';
 import { ApiUsoModule } from './apiuso/api-uso.module';
 import { LoginModule } from './login/login.module';
@@ -26,6 +27,7 @@ import { ApiKeyMiddleware } from './common/parse-mongo-id/middleware/api-key.mid
 
 @Module({
   imports: [
+    ReportesModule,
     ApiKeyModule,
     ApiUsoModule,
     LoginModule,

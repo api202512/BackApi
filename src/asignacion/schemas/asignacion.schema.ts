@@ -21,17 +21,20 @@ export class Asignacion {
   grupo: string;
 
   @Prop({
-    type: {
-      dia: String,
-      horaInicio: String,
-      horaFin: String,
-    },
+    type: [
+      {
+        dia: { type: String, required: true },
+        horaInicio: { type: String, required: true },
+        horaFin: { type: String, required: true },
+      },
+    ],
+    unique: true,
   })
-  Horarios: {
+  Horarios: Array<{
     dia: string;
     horaInicio: string;
     horaFin: string;
-  };
+  }>;
 }
 
 export const AsignacionSchema = SchemaFactory.createForClass(Asignacion);

@@ -67,7 +67,7 @@ export class AsignacionDto {
     description: 'Descripción de Horario',
   })
   @IsNotEmpty()
-  readonly Horario: HorarioDto;
+  readonly Horarios: HorarioDto;
 }
 
 export class UpdateAsignacionDto extends PartialType(AsignacionDto) {}
