@@ -10,7 +10,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('API de Programa Educativo de Technologías de la Información')
+    .setTitle('API de Programa Educativo de Tecnologías de la Información')
     .setDescription('Documentación de la API')
     .setVersion('1.0')
     .addBearerAuth() // Para permitir autenticación con token
